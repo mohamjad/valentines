@@ -103,6 +103,7 @@ export default class SCENE extends Phaser.Scene {
         this.load.image('wagon', 'assets/art/wagon.png');
         this.load.image('moon', 'assets/art/moon.png');
         this.load.image('star', 'assets/art/star.png');
+        this.load.image('barn', 'assets/art/barn.png');
 
         //sounds
         this.load.audio('rain', ['assets/soundFX/asciiRain.mp3']);
@@ -123,6 +124,7 @@ export default class SCENE extends Phaser.Scene {
 
         this.player = new PLAYER(this, 375, 300, 'dude', 0);        
         this.player.setCollideWorldBounds(true);
+        this.physics.world.setBounds(0, 0, 1024, 768, true, true, false, true); // don't collide with top of screen
 
         this.coins = new COINS(world, this, {
             key: 'coin',
@@ -134,7 +136,7 @@ export default class SCENE extends Phaser.Scene {
         this.art = [];
                     
         this.physics.add.collider(this.player, this.base);  
-        this.physics.add.collider(this.player, this.platforms);  
+        this.physics.add.collider(this.player, this.platforms);          
         this.physics.add.collider(this.mobs, this.base); 
         this.physics.add.collider(this.mobs, this.platforms);
         this.physics.add.collider(this.coins, this.base);

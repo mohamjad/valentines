@@ -13,7 +13,7 @@ export default class COINS extends Phaser.Physics.Arcade.Group {
     rain() {
         //  A new batch of coins to collect
         this.children.iterate(function (child) {
-            child.enableBody(true, child.x, Phaser.Math.FloatBetween(0, -75), true, true);
+            child.enableBody(true, child.x, Phaser.Math.FloatBetween(-25, -75), true, true);
             child.setBounceY(Phaser.Math.FloatBetween(0.2, 0.4));
             child.setVelocityY(Phaser.Math.FloatBetween(0, 250));
         });

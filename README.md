@@ -36,6 +36,11 @@ A single-pane ASCII-art platformer made with Phaser.io
 - game logic and event handling done in scene.js, everything else is modular components
 - base, player, and ui always persist
 
+### Levels
+- to add new levels simply add a new object to the array in level.js
+- put new artwork in the assets folder and load them in classes/scene.js : preload()
+- define new mob behaviour in classes/mobs.js
+
 ## Phaser References
 - tutorial: https://phaser.io/tutorials/making-your-first-phaser-3-game/part1
 - responsiveness: https://newdocs.phaser.io/docs/3.60.0/Phaser.Scale

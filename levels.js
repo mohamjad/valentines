@@ -137,5 +137,56 @@ export const LEVELS = [
             {x: 650, y: 150, key: 'cloud0'},
             {x: 900, y: 225, key: 'cloud1'}
         ]
+    }, { // lvl 7
+        plats: [   
+            {x: 0, y: 150, key: 'platform7'}, // |_|_|
+            {x: 446, y: 150, key: 'platform6'}, // |_|
+            {x: 780, y: 150, key: 'platform7'}, // |_|_|
+            
+            {x: 0, y: 300, key: 'platform7'}, // |_|_|
+            {x: 225, y: 300, key: 'platform6'}, // |_|
+            {x: 430, y: 420, key: 'platform0'}, // !!!
+            {x: 675, y: 300, key: 'platform6'}, // |_|
+            {x: 785, y: 300, key: 'platform7'}, // |_|_|
+            
+            {x: 285, y: 570, key: 'platform4'}, // ///
+            {x: 525, y: 570, key: 'platform5'}, // \\\
+            
+            {x: 3, y: 690, key: 'platform5'}, // \\\
+            {x: 3, y: 710, key: 'platform4'}, // ///
+            {x: 810, y: 690, key: 'platform4'}, // ///
+            {x: 810, y: 710, key: 'platform5'}, // \\\
+        ],
+        staticMobs: [
+            //[485, 350, 'mob0'],
+        ],
+        dynamicMobs: [
+            //[0, 270, 'mob1', 'right']
+        ],
+        art: [
+            {x: 605, y: 728, key: 'barn'},
+        ]
     }
+
+    // }, { // lvl x
+    //     plats: [            
+    //         {x: 0, y: 50, key: 'platform0'}, // !!!
+    //         {x: 0, y: 75, key: 'platform1'}, // &&&
+    //         {x: 0, y: 100, key: 'platform2'}, // %%%
+    //         {x: 0, y: 125, key: 'platform3'}, // ###
+    //         {x: 0, y: 150, key: 'platform4'}, // ///
+    //         {x: 0, y: 175, key: 'platform5'}, // \\\
+    //         {x: 0, y: 200, key: 'platform6'}, // |_|
+    //         {x: 0, y: 700, key: 'platform7'}, // |_|_|
+    //     ],
+    //     staticMobs: [
+    //         [485, 350, 'mob0'],
+    //     ],
+    //     dynamicMobs: [
+    //         [0, 270, 'mob1', 'right']
+    //     ],
+    //     art: [
+    //         {x: 605, y: 496, key: 'flower0'},
+    //     ]
+    // }
 ]
