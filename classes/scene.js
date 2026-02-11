@@ -562,14 +562,16 @@ export default class SCENE extends Phaser.Scene {
     showDoubleJumpPopup() {
         this.showingDoubleJumpPopup = true;
         this.physics.pause();
-        const popupBg = this.add.image(512, 350, 'scrollBG').setDepth(97).setTint(this.theme.bg);
-        const popupScroll = this.add.image(512, 350, 'scroll').setDepth(98).setTint(this.theme.scroll);
-        const popupText = this.add.text(512, 270, 'New ability: Double jump!\n\nPress jump again while in the air.', {
+        const cx = 512;
+        const cy = 310;
+        const popupBg = this.add.image(cx, cy, 'scrollBG').setDepth(97).setTint(this.theme.bg).setScrollFactor(0);
+        const popupScroll = this.add.image(cx, cy, 'scroll').setDepth(98).setTint(this.theme.scroll).setScrollFactor(0);
+        const popupText = this.add.text(cx, cy - 60, 'New ability: Double jump!\n\nPress jump again while in the air.\n\nHearts reset your jump — collect one to get your double jump back.', {
             color: 'white', fontSize: 'xx-large', align: 'center',
-        }).setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll);
-        const btn = this.add.text(512, 400, '[OK]', {
+        }).setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll).setScrollFactor(0);
+        const btn = this.add.text(cx, cy + 50, '[OK]', {
             color: 'white', fontSize: 'xx-large',
-        }).setInteractive().setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll);
+        }).setInteractive().setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll).setScrollFactor(0);
         btn.on('pointerup', () => {
             this.showingDoubleJumpPopup = false;
             this.physics.resume();
@@ -659,7 +661,11 @@ export default class SCENE extends Phaser.Scene {
             this.cameras.main.setZoom(1);
         }
         if (lvl === 0) {
-            this.tutorial = new TUTORIAL(this, 512, -700); 
+            this.tutorial = new TUTORIAL(this, 512, -700);
+            if (LEVEL && LEVEL.plats && LEVEL.plats.length) {
+                this.platforms.build(LEVEL.plats);
+                this.platforms.setTint(this.theme.platforms);
+            }
         } else {
             this.platforms.build(LEVEL.plats);  
             this.platforms.setTint(this.theme.platforms);

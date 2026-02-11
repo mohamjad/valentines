@@ -1,6 +1,10 @@
 export const LEVELS = [
-    {
-        // tutorial defined in class
+    { // level 0 – tutorial + one heart to advance to level 1
+        plats: [
+            { x: 400, y: 520, key: 'platform0' },
+            { x: 620, y: 520, key: 'platform0' },
+        ],
+        coinPositions: [[512, 460]],
     }, { // level 1 (first level)
         plats: [
             {x: 435, y: 330, key: 'platform0'},
@@ -19,7 +23,12 @@ export const LEVELS = [
         ],
         deco: [
             {x: 24, y: 48}, {x: 880, y: 120}, {x: 512, y: 280}, {x: 80, y: 520}, {x: 920, y: 640}
-        ]
+        ],
+        coinPositions: [
+            [435, 270],   // above platform0
+            [744, 380],   // above platform3
+            [460, 520],   // above platform1
+        ],
     }, { // level 2 – COMBINED TEST: physics (P1–P5) + coin recharge (P6–P9)
         doubleJump: true,
         gravity: 560,
@@ -48,52 +57,33 @@ export const LEVELS = [
         ],
         art: [],
         deco: []
-    }, { // level 3 – MINE SHAFT: enemy timing + coin extensions
+    }, { // level 3 – MINE SHAFT Section 1 only: ends at first checkpoint
         doubleJump: true,
         gravity: 560,
-        worldWidth: 4400,
+        worldWidth: 1400,
         worldMinY: -100,
         groundDeathY: 550,
         spawn: { x: 100, y: 368 },
         checkpoints: [
-            { x: 1205, y: 290 },   // on P5 after Section 1
-            { x: 2460, y: 290 },   // on P8 after Section 2
-            { x: 3620, y: -20 },   // on P10 after coin corridor
+            { x: 1205, y: 290 },   // on P5 – level ends here
         ],
         coinPositions: [
-            [1580, 190],   // Coin 1: 100px above P5; double jump required
-            [3080, 80],    // Coin 2: 100px above P9
-            [3280, -20],   // Coin 3: diagonal from Coin 2
-            [4200, 40],    // Final heart on P12 (goal)
+            [1205, 230],   // heart above P5 at checkpoint – collect to complete level
         ],
         plats: [
-            // SECTION 1: Into the Depths (x: 0–2200)
             {x: 0, y: 400, key: 'platform5'},       // P1 Start
             {x: 300, y: 400, key: 'platform0'},     // P2; bouncer at 360
             {x: 600, y: 290, key: 'platform0'},     // P3; 110px UP; spikes below
             {x: 900, y: 290, key: 'platform0'},     // P4; bouncer at 950
-            {x: 1150, y: 290, key: 'platform0'},    // P5; after checkpoint 1
-            {x: 1900, y: 190, key: 'platform0'},    // P6; after Coin 1; long spike pit below
-            {x: 2150, y: 290, key: 'platform0'},    // P7; 100px down breather
-            // SECTION 2: The Ascent (x: 2200–3600)
-            {x: 2400, y: 290, key: 'platform0'},    // P8; after checkpoint 2
-            {x: 2650, y: 180, key: 'platform0'},   // P9; 110px UP; bouncer at 2700
-            {x: 3550, y: -20, key: 'platform0'},    // P10; after Coin 2/3; wall spikes L/R
-            {x: 3800, y: 80, key: 'platform0'},     // P11; bouncer at 3865
-            {x: 4050, y: 80, key: 'platform0'},     // P12 GOAL
+            {x: 1150, y: 290, key: 'platform0'},    // P5; checkpoint + goal
         ],
         spikes: [
             { x: 450, y: 520, width: 300, height: 20 },
-            { x: 1300, y: 420, width: 700, height: 20 },
-            { x: 2950, y: 80, width: 20, height: 210 },
-            { x: 3690, y: -20, width: 20, height: 200 },
         ],
         staticMobs: [],
         dynamicMobs: [
             [360, 350, 'bomb'],    // Bounce around P2
             [950, 250, 'bomb'],    // Bounce around P4
-            [2700, 140, 'bomb'],   // Bounce around P9
-            [3865, 40, 'bomb'],    // Bounce around P11
         ],
         art: [],
         deco: []
