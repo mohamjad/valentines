@@ -170,10 +170,10 @@ export default class SCENE extends Phaser.Scene {
         this.physics.add.collider(this.player, this.mobs, this.hitMob, null, this);  
         this.physics.add.overlap(this.player, this.coins, this.collectCoin, null, this);
 
-        // Debug: keys 1–4 skip to level 1–4
+        // Debug: keys 1–6 skip to level 1–6
         this.input.keyboard.on('keydown', (e) => {
-            let n = e.key === '1' ? 1 : e.key === '2' ? 2 : e.key === '3' ? 3 : e.key === '4' ? 4 : 0;
-            if (n > 0 && n <= this.maxLevel) {
+            const n = parseInt(e.key, 10);
+            if (!isNaN(n) && n >= 1 && n <= this.maxLevel) {
                 this.level = String(n);
                 localStorage.setItem('level', this.level);
                 this.scene.restart();

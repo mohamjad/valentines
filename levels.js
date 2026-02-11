@@ -127,7 +127,7 @@ export const LEVELS = [
         dynamicMobs: [],
         art: [],
         deco: []
-    }, { // level 5 – Will you be my Valentine? Simple jump to the heart at the end
+    }, { // level 5 – Will you be my Valentine?
         valentineChoiceLevel: true,
         doubleJump: true,
         gravity: 560,
@@ -135,16 +135,57 @@ export const LEVELS = [
         groundDeathY: 500,
         spawn: { x: 100, y: 368 },
         yesZone: { x: 950, y: 320, width: 120, height: 100 },
-        coinPositions: [[1010, 300]],   // heart at the end – collect to say yes
+        coinPositions: [[1010, 300]],
         plats: [
-            {x: 0, y: 400, key: 'platform5'},       // start
+            {x: 0, y: 400, key: 'platform5'},
             {x: 280, y: 400, key: 'platform0'},
             {x: 520, y: 350, key: 'platform0'},
             {x: 760, y: 400, key: 'platform0'},
-            {x: 980, y: 350, key: 'platform0'},    // under the heart
+            {x: 980, y: 350, key: 'platform0'},
         ],
         staticMobs: [],
         dynamicMobs: [],
+        art: [],
+        deco: []
+    }, { // level 6 – FAREWELL (Celeste veterans only)
+        doubleJump: true,
+        gravity: 560,
+        worldWidth: 7800,
+        worldMinY: -650,
+        groundDeathY: 100,
+        spawn: { x: 60, y: 368 },
+        checkpoints: [
+            { x: 3300, y: -140 },   // after Section 2
+            { x: 6000, y: -340 },   // after Section 4
+        ],
+        coinPositions: [
+            [1010, -40],    [2620, -40],    [2820, -140],   [3780, -240],
+            [3980, -340],   [4180, -440],   [4380, -540],   [5450, -240],
+            [6480, -440],   [6730, -540],   [6980, -440],   [7230, -540],
+        ],
+        plats: [
+            { x: 0, y: 400, key: 'platform5' },        { x: 370, y: 260, key: 'platform0' },
+            { x: 600, y: 90, key: 'platform0' },       { x: 1710, y: -40, key: 'platform0' },
+            { x: 1940, y: -40, key: 'platform0' },     { x: 2190, y: 60, key: 'platform0' },
+            { x: 3100, y: -140, key: 'platform0' },     { x: 3350, y: -140, key: 'platform0' },
+            { x: 4700, y: -540, key: 'platform0' },     { x: 4950, y: -540, key: 'platform0' },
+            { x: 5200, y: -440, key: 'platform0' },     { x: 5800, y: -340, key: 'platform0' },
+            { x: 6050, y: -340, key: 'platform0' },     { x: 7350, y: -540, key: 'platform5' },
+            { x: 7550, y: -540, key: 'platform5' },
+        ],
+        spikes: [
+            { x: 500, y: 20, width: 200, height: 20 },   { x: 700, y: 200, width: 1100, height: 20 },
+            { x: 2090, y: -40, width: 20, height: 100 }, { x: 2270, y: -40, width: 20, height: 100 },
+            { x: 2500, y: -140, width: 20, height: 200 }, { x: 3200, y: -140, width: 20, height: 200 },
+            { x: 3700, y: -620, width: 1100, height: 20 }, { x: 3500, y: -50, width: 1300, height: 20 },
+            { x: 5300, y: -540, width: 20, height: 300 }, { x: 5880, y: -540, width: 20, height: 300 },
+            { x: 6200, y: -50, width: 1500, height: 20 },  { x: 6400, y: -620, width: 1000, height: 20 },
+        ],
+        staticMobs: [],
+        dynamicMobs: [
+            [415, 220, 'bomb'], [1755, -80, 'bomb'], [2750, -80, 'bomb'], [4080, -380, 'bomb'],
+            [5550, -180, 'bomb'], [6605, -380, 'bomb'], [7105, -380, 'bomb'],
+        ],
         art: [],
         deco: []
     }
