@@ -11,11 +11,9 @@ export default class UI {
             fill: '#FFF'
         };
         
-        //UI
-        this.scoreText = scene.add.text(16, 16, `score: $${scene.score}`, fontStyle)
+        //UI – hearts (no level header)
+        this.scoreText = scene.add.text(16, 16, `hearts: ${scene.score}`, fontStyle)
             .setTint(scene.theme.ui);
-        this.levelText = scene.add.text(512, 32, `level: ${scene.level} / ${this.scene.maxLevel}`, fontStyle)
-            .setOrigin(0.5).setTint(scene.theme.ui);
         
         //help button
         this.helpBtn = scene.add.text(1024 - 120, 16, '[?]', fontStyle).setOrigin(1, 0)
@@ -58,9 +56,9 @@ export default class UI {
         });
 
         let container = scene.add.container(0, 0, [
-            this.scoreText, this.levelText, this.helpBtn, this.fsBtn
+            this.scoreText, this.helpBtn, this.fsBtn
         ]);
-        container.setDepth(100);
+        container.setDepth(100).setScrollFactor(0);
     }
     
     updateScore(newScore) {   
@@ -78,10 +76,9 @@ export default class UI {
                 scaleY: 1.01, //onStart doesn't get called without this
                 yoyo: true, //returns to original scale
                 onStart: () => {
-                    score += inc; 
-                    this.scoreText.setText('score: $' + score);
+                    score += inc;
+                    this.scoreText.setText('hearts: ' + Math.max(0, score));
                     this.scene.coinFX.play();
-                    //console.log(score);
                 } 
             });
         } 
@@ -92,12 +89,15 @@ export default class UI {
                 if(this.scene.tipsShowing) {
                     this.scene.tips.hideTips();
                 }
+                if (this.scene.score < 0) {
+                    this.scene.heartsGameOver();
+                }
             }
         });
     }
 
     updateLevel(level) {
-        this.levelText.setText(`level: ${level} / ${this.scene.maxLevel}`);
+        // level header removed
     }
 
     toggleFullscreen() {        
@@ -207,13 +207,9 @@ THEMES:`, fontStyle).setTint(tint);
                 this.optFS, 
                 this.optSound,
                 this.themesText,
-                this.themeOpts.Textarea, //todo: iterate these instead
-                this.themeOpts.Coding_Vibes,
-                this.themeOpts.Light_Bright,
-                this.themeOpts.Matrix_Mode,
-                this.themeOpts.Parchment
+                ...Object.values(this.themeOpts)
             ]);
-            this.help.setDepth(100);
+            this.help.setDepth(100).setScrollFactor(0);
         } else {
             if(!this.scene.tipsShowing) this.scene.physics.resume();
             this.helpBtn.setText("[?]");
@@ -234,7 +230,6 @@ THEMES:`, fontStyle).setTint(tint);
     changeTint() {
         let colours = this.scene.theme;
         this.scoreText.setTint(colours.ui);
-        this.levelText.setTint(colours.ui);
         this.helpBtn.setTint(colours.ui);
         this.fsBtn.setTint(colours.ui);
         if(this.helpShowing) {
@@ -271,10 +266,10 @@ THEMES:`, fontStyle).setTint(tint);
         if(this.scene.asciiRain) this.scene.asciiRain.changeTint();
 
         if(this.scene.art) {
-            let n = this.scene.art.length;
-            for(let i = 0; i < n; i++) {
+            for (let i = 0; i < this.scene.art.length; i++) {
                 let piece = this.scene.art[i];
-                piece.setTint(theme.art);
+                if (piece._cornerDeco) continue;
+                if (piece.setTint) piece.setTint(theme.art);
             }
         }
     }

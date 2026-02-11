@@ -16,6 +16,9 @@ export default class PLAYER extends Phaser.Physics.Arcade.Sprite {
         scene.input.addPointer(1); //for multi-touch
         this.touchY = 0;
         this.click = 0; //duration of last click
+        this.jumpsUsed = 0;       // 0 = 2 jumps left (ground + 1 air), 1 = 1 air left, 2 = none
+        this.doubleJumpLevel = false;
+        this._rechargeGraceFrames = 0; // after coin recharge, don't reset jumpsUsed for N frames
     }
 
     createAnims() {
@@ -103,11 +106,22 @@ export default class PLAYER extends Phaser.Physics.Arcade.Sprite {
             }
         }        
     
-        if(jump && this.body.touching.down){
-            if(touch || Phaser.Input.Keyboard.JustDown(this.cursors.up) 
+        // Only reset to "full jumps" when clearly on ground (not rising). Avoids spurious reset when leaving a platform.
+        if (this._rechargeGraceFrames > 0) this._rechargeGraceFrames--;
+        const onGround = this.body.touching.down && this.body.velocity.y >= -80;
+        if (onGround && this._rechargeGraceFrames === 0) {
+            this.jumpsUsed = 0;
+        }
+        if (jump) {
+            const jumpPressed = touch || Phaser.Input.Keyboard.JustDown(this.cursors.up)
                 || Phaser.Input.Keyboard.JustDown(this.wasd.W)
-                || Phaser.Input.Keyboard.JustDown(this.wasd.SPACE)) {
+                || Phaser.Input.Keyboard.JustDown(this.wasd.SPACE);
+            if (this.body.touching.down && jumpPressed) {
                 this.setVelocityY(-400);
+                this.jumpsUsed = 1;
+            } else if (this.doubleJumpLevel && !this.body.touching.down && jumpPressed && this.jumpsUsed < 2) {
+                this.setVelocityY(-380);
+                this.jumpsUsed++;
             }
         }
     }

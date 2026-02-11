@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
     <meta charset="UTF-8" />
-    <title>TXTARIA</title>
+    <title>For Joanne ♥</title>
     <meta name="description" content="ASCII art platformer made with Phaser.io" />
     <meta name='author' content='Sarah Rosanna Busch' />
     <meta name='date' content='8 Sept 2024' />
@@ -43,6 +43,11 @@
             font-size: 18pt;
             height: 1.5rem;
         }
+        #titleText {
+            font-size: 72pt;
+            margin: 0.5rem;
+            color: #f8bbd9;
+        }
         button {
             padding: 1rem 2rem;
             font-size: large;
@@ -70,53 +75,28 @@
 </head>
 <body>
     <div id="landingPage">
-        <h2>Welcome to</h2>
-        <h1><img src="./assets/title.svg" alt="TXTARIA [alpha]" height="92px"></h1>
-        <h2 id="subtitle"></h2>
-        <button id="playBtn" style="opacity: 0"> PLAY </button>
+        <h2>I made this for you, Joanne</h2>
+        <h1 id="titleText">♥</h1>
+        <button id="playBtn" style="opacity: 0">play the game ☺</button>
         <div id="fineprint" style="opacity: 0">
-            <p>A platformer made with Phaser.io</p>
-            <p>By Ar0se Games</p>
+            <p>Collect the hearts and reach the end ♥</p>
+            <p>play the game bra</p>
         </div>
     </div>
     
     <div id="game" style="display:none"></div>
 
     <script> // page load animation
-        let subtitle = document.getElementById("subtitle");
         let h1 = document.getElementsByTagName('h1')[0];
         let playBtn = document.getElementById("playBtn");
         let fineprint = document.getElementById("fineprint");
 
-        let txt = "Where ASCII reigns";
-        let rTxt = 'ains';
-        let timer, frame = 0, r = 0;
-
-        timer = setInterval(() => {
-            if(h1.offsetWidth) { //to ensure title loads first
-                let startFrame = 7;
-                let len0 = startFrame + txt.length;
-                let pause = len0 + 3;
-                let len1 = pause + 5;
-                let len2 = len1 + 4;
-                if(frame > startFrame && frame <= len0) {
-                    subtitle.innerText = txt.substring(0, frame - startFrame);                  
-                } else if(frame <= pause) {
-                    //thinking
-                } else if(frame <= len1) {
-                    let s = subtitle.innerText;
-                    let l = s.length - 1;
-                    subtitle.innerText = s.substring(0, l);
-                } else if(frame <= len2) {
-                    subtitle.innerText += rTxt[r];
-                    r++;
-                } else {
-                    clearInterval(timer);
-                    playBtn.classList.add("fadeIn");
-                    playBtn.focus();
-                    fineprint.className = "fadeIn delayed";
-                }
-                frame++;
+        let timer = setInterval(() => {
+            if (h1 && h1.offsetWidth) {
+                clearInterval(timer);
+                playBtn.classList.add("fadeIn");
+                playBtn.focus();
+                fineprint.className = "fadeIn delayed";
             }
         }, 100);
     </script>
@@ -139,6 +119,7 @@
 
         function start() {
             clearInterval(timer);
+            localStorage.setItem("level", "0");
             landingPage.style.display = "none";
             gameCanvas.style.display = "flex";
             playGame();

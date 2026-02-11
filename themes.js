@@ -1,4 +1,18 @@
 export const themes = {
+    Valentine: {
+        kill: 0xc2185b,
+        player: 0xf8bbd9,
+        base: 0x880e4f,
+        coins: 0xf48fb1,
+        platforms: 0xad1457,
+        mobs: 0xe91e63,
+        pots: 0xc2185b,
+        bg: 0x1a0a0f,
+        ui: 0xf8bbd9,
+        scroll: 0xfce4ec,
+        rain: 0xf8bbd9,
+        art: 0x888888
+    },
     Textarea: {
         kill: 0xFF0000,
         player: 0xECECEC, 

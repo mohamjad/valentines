@@ -1,12 +1,12 @@
 export const LEVELS = [
     {
-        //tutorial defined in class
-    }, { //lvl 1
+        // tutorial defined in class
+    }, { // level 1 (first level)
         plats: [
-            {x: 435, y: 330, key: 'platform0'}, // !!!
-            {x: 744, y: 440, key: 'platform3'}, // ###
-            {x: 0, y: 460, key: 'platform2'}, // %%%
-            {x: 460, y: 580, key: 'platform1'}, // &&&
+            {x: 435, y: 330, key: 'platform0'},
+            {x: 744, y: 440, key: 'platform3'},
+            {x: 0, y: 460, key: 'platform2'},
+            {x: 460, y: 580, key: 'platform1'},
         ],
         art: [
             {x: 50, y: 727, key: 'tree1'},
@@ -16,177 +16,137 @@ export const LEVELS = [
             {x: 50, y: 180, key: 'cloud0'},
             {x: 230, y: 230, key: 'cloud1'},
             {x: 840, y: 200, key: 'cloud0'}
+        ],
+        deco: [
+            {x: 24, y: 48}, {x: 880, y: 120}, {x: 512, y: 280}, {x: 80, y: 520}, {x: 920, y: 640}
         ]
-    }, { // lvl 2        
+    }, { // level 2 – COMBINED TEST: physics (P1–P5) + coin recharge (P6–P9)
+        doubleJump: true,
+        gravity: 560,
+        worldWidth: 3900,
+        worldMinY: -400,
+        groundDeathY: 500,
+        spawn: { x: 100, y: 351 },
+        coinPositions: [
+            [2580, -40],   // Coin 1: 410px from P6 edge (2170) – MUST double jump to reach; then recharge for P7
+            [3450, -170],  // Coin 2: first rung (130px above P8)
+            [3450, -300],  // Coin 3: second rung (130px above Coin 2)
+            [3775, -320],  // Final heart on P9 – collect to complete level
+        ],
         plats: [
-            {x: 600, y: 580, key: 'platform0'}, //158px X 21px
-            {x: 855, y: 430, key: 'platform0'},
-            {x: 685, y: 270, key: 'platform0'},
-            {x: 430, y: 350, key: 'platform0'},
-            {x: 175, y: 200, key: 'platform0'},
-            {x: -75, y: 340, key: 'platform0'},
-            {x: 90, y: 500, key: 'platform0'}
+            // --- Physics verification (P1–P5) ---
+            {x: 0, y: 400, key: 'platform5'},     // P1 Start (width 200, height 40)
+            {x: 350, y: 400, key: 'platform0'},   // P2 Single Jump Test; gap 150px
+            {x: 600, y: 260, key: 'platform0'},    // P3 Vertical Single Jump; 100px H, 140px UP
+            {x: 850, y: 90, key: 'platform0'},    // P4 Double Jump Required; 130px H, 170px UP
+            {x: 1720, y: 90, key: 'platform0'},   // P5 Max Double Jump Distance; ~720px from P4
+            // --- Coin recharge tests (P6–P9) ---
+            {x: 2050, y: 90, key: 'platform0'},   // P6; edge at 2170; gap 130px from P5
+            {x: 2900, y: -40, key: 'platform0'},  // P7 Extended; ~320px from Coin 1 – need recharge then 1 jump
+            {x: 3200, y: -40, key: 'platform0'},   // P8; gap 150px (easy)
+            {x: 3700, y: -300, key: 'platform0'},  // P9 Sky Platform; triple jump via Coin 2 → Coin 3 → P9
         ],
-        staticMobs: [
-            [720, 500, 'mob0'],
-            [210, 400, 'mob0'],
-            [510, 300, 'mob0']
+        art: [],
+        deco: []
+    }, { // level 3 – MINE SHAFT: enemy timing + coin extensions
+        doubleJump: true,
+        gravity: 560,
+        worldWidth: 4400,
+        worldMinY: -100,
+        groundDeathY: 550,
+        spawn: { x: 100, y: 368 },
+        checkpoints: [
+            { x: 1205, y: 290 },   // on P5 after Section 1
+            { x: 2460, y: 290 },   // on P8 after Section 2
+            { x: 3620, y: -20 },   // on P10 after coin corridor
         ],
-        art: [
-            {x: 100, y: 727, key: 'flower3'},
-            {x: 825, y: 727, key: 'flower4'},
-            {x: 240, y: 200, key: 'flower1'},
-            {x: 715, y: 270, key: 'flower2'}
-        ]
-    }, { //lvl 3
+        coinPositions: [
+            [1580, 190],   // Coin 1: 100px above P5; double jump required
+            [3080, 80],    // Coin 2: 100px above P9
+            [3280, -20],   // Coin 3: diagonal from Coin 2
+            [4200, 40],    // Final heart on P12 (goal)
+        ],
         plats: [
-            {x: 770, y: 200, key: 'platform0'}, // !!!
-            {x: 435, y: 310, key: 'platform1'}, // &&&
-            {x: 90, y: 450, key: 'platform2'}, // %%%
-            {x: 560, y: 580, key: 'platform3'}, // ###
+            // SECTION 1: Into the Depths (x: 0–2200)
+            {x: 0, y: 400, key: 'platform5'},       // P1 Start
+            {x: 300, y: 400, key: 'platform0'},     // P2; bouncer at 360
+            {x: 600, y: 290, key: 'platform0'},     // P3; 110px UP; spikes below
+            {x: 900, y: 290, key: 'platform0'},     // P4; bouncer at 950
+            {x: 1150, y: 290, key: 'platform0'},    // P5; after checkpoint 1
+            {x: 1900, y: 190, key: 'platform0'},    // P6; after Coin 1; long spike pit below
+            {x: 2150, y: 290, key: 'platform0'},    // P7; 100px down breather
+            // SECTION 2: The Ascent (x: 2200–3600)
+            {x: 2400, y: 290, key: 'platform0'},    // P8; after checkpoint 2
+            {x: 2650, y: 180, key: 'platform0'},   // P9; 110px UP; bouncer at 2700
+            {x: 3550, y: -20, key: 'platform0'},    // P10; after Coin 2/3; wall spikes L/R
+            {x: 3800, y: 80, key: 'platform0'},     // P11; bouncer at 3865
+            {x: 4050, y: 80, key: 'platform0'},     // P12 GOAL
         ],
-        staticMobs: [
-            [255, 430, 'mob0'], // %%%
-            [595, 180, 'mob0']  // &&&
+        spikes: [
+            { x: 450, y: 520, width: 300, height: 20 },
+            { x: 1300, y: 420, width: 700, height: 20 },
+            { x: 2950, y: 80, width: 20, height: 210 },
+            { x: 3690, y: -20, width: 20, height: 200 },
         ],
+        staticMobs: [],
         dynamicMobs: [
-            [950, 0, 'mob1']
+            [360, 350, 'bomb'],    // Bounce around P2
+            [950, 250, 'bomb'],    // Bounce around P4
+            [2700, 140, 'bomb'],   // Bounce around P9
+            [3865, 40, 'bomb'],    // Bounce around P11
         ],
-        art: [
-            {x: 200, y: 727, key: 'tree2'}, //group 1
-            {x: 125, y: 727, key: 'mushroom0'},
-            {x: 800, y: 727, key: 'tree3'}, //group 2
-            {x: 850, y: 727, key: 'tree2'},
-            {x: 925, y: 727, key: 'tree3'},
-            {x: 680, y: 580, key: 'mushroom0'}, //platform  
-            {x: 880, y: 580, key: 'mushroom1'},
-            {x: 215, y: 230, key: 'cloud1'}, //sky
-            {x: 75, y: 200, key: 'moon'}
-        ]
-    }, { //lvl 4
+        art: [],
+        deco: []
+    }, { // level 4 – VALENTINE'S HEART: one heart-shaped coin chain, no enemies
+        doubleJump: true,
+        gravity: 560,
+        worldWidth: 2600,
+        worldMinY: -100,
+        groundDeathY: 550,
+        spawn: { x: 100, y: 368 },
+        checkpoints: [
+            { x: 640, y: 400 },   // on P3 (Launch Platform)
+        ],
+        coinPositions: [
+            [980, 300],   // C1 left going UP
+            [1180, 150],  // C2 left peak
+            [1430, 250],  // C3 center dip
+            [1680, 150],  // C4 right going UP
+            [2290, 260],  // C5 last heart on goal platform (Landing in Love)
+        ],
         plats: [
-            {x: 350, y: 290, key: 'platform1'},
-            {x: -200, y: 440, key: 'platform3'},
-            {x: 760, y: 440, key: 'platform3'},
-            {x: 440, y: 580, key: 'platform0'},
+            {x: 0, y: 400, key: 'platform5'},       // P1 Start
+            {x: 300, y: 400, key: 'platform0'},      // P2; gap 100px
+            {x: 550, y: 400, key: 'platform0'},      // P3 Launch Platform; gap 50px
+            {x: 2200, y: 300, key: 'platform0'},     // P4 GOAL (Landing in Love)
+            {x: 2380, y: 300, key: 'platform0'},     // P4 continued – wide celebration zone
         ],
-        dynamicMobs: [
-            [512, 16, 'bomb'],
-            [912, 16, 'bomb']
+        spikes: [
+            { x: 700, y: 530, width: 1600, height: 20 },
         ],
-        art: [
-            {x: 100, y: 727, key: 'tree0'},            
-            {x: 750, y: 727, key: 'tree2'},
-            {x: 875, y: 727, key: 'tree3'},
-            {x: 470, y: 580, key: 'tower0'},
-            {x: 100, y: 220, key: 'moon'},
-            {x: 800, y: 200, key: 'star'}
-        ]
-    }, { //lvl 5
+        staticMobs: [],
+        dynamicMobs: [],
+        art: [],
+        deco: []
+    }, { // level 5 – Will you be my Valentine? Simple jump to the heart at the end
+        valentineChoiceLevel: true,
+        doubleJump: true,
+        gravity: 560,
+        worldWidth: 1200,
+        groundDeathY: 500,
+        spawn: { x: 100, y: 368 },
+        yesZone: { x: 950, y: 320, width: 120, height: 100 },
+        coinPositions: [[1010, 300]],   // heart at the end – collect to say yes
         plats: [
-            {x: 345, y: 200, key: 'platform0'}, // !!!
-            {x: 740, y: 280, key: 'platform4'}, // ///
-            {x: 60, y: 350, key: 'platform5'}, // \\\
-            {x: 480, y: 430, key: 'platform1'}, // &&&
-            {x: 680, y: 580, key: 'platform2'}, // %%%
+            {x: 0, y: 400, key: 'platform5'},       // start
+            {x: 280, y: 400, key: 'platform0'},
+            {x: 520, y: 350, key: 'platform0'},
+            {x: 760, y: 400, key: 'platform0'},
+            {x: 980, y: 350, key: 'platform0'},    // under the heart
         ],
-        staticMobs: [
-            [200, 700, 'mob0'],
-            [900, 550, 'mob0']
-        ],
-        dynamicMobs:[
-            [312, 0, 'bomb'],
-            [1012, 640, 'mob1']
-        ],
-        art: [
-            {x: 100, y: 727, key: 'tree0'},            
-            {x: 460, y: 727, key: 'hut'},
-            {x: 550, y: 727, key: 'shrub0'},
-            {x: 700, y: 580, key: 'rat'},
-            {x: 40, y: 200, key: 'star'},
-            {x: 400, y: 325, key: 'cloud1'},
-            {x: 900, y: 150, key: 'star'}
-        ]
-    }, { // lvl 6
-        plats: [
-            {x: 345, y: 184, key: 'platform0'}, // !!!
-            {x: 685, y: 265, key: 'platform0'}, // !!!
-            {x: 800, y: 580, key: 'platform6'}, 
-            {x: 566, y: 496, key: 'platform6'}, 
-            {x: 275, y: 425, key: 'platform7'}, 
-            {x: 8, y: 335, key: 'platform7'}, 
-        ],
-        staticMobs: [
-            [485, 350, 'mob0'],
-            [145, 700, 'mob0'],
-            [900, 700, 'mob0']
-        ],
-        dynamicMobs: [
-            [0, 270, 'mob1', 'right']
-        ],
-        art: [
-            {x: 605, y: 496, key: 'flower0'},            
-            {x: 80, y: 727, key: 'flower1'},
-            {x: 715, y: 727, key: 'flower2'},
-            {x: 900, y: 727, key: 'mushroom1'},
-            {x: 100, y: 335, key: 'mushroom1'},
-            {x: 46, y: 335, key: 'mushroom0'},
-            {x: 450, y: 727, key: 'wagon'},
-            {x: 820, y: 581, key: 'hut'},
-            {x: 341, y: 425, key: 'tower0'},
-            {x: 650, y: 150, key: 'cloud0'},
-            {x: 900, y: 225, key: 'cloud1'}
-        ]
-    }, { // lvl 7
-        plats: [   
-            {x: 0, y: 150, key: 'platform7'}, // |_|_|
-            {x: 446, y: 150, key: 'platform6'}, // |_|
-            {x: 780, y: 150, key: 'platform7'}, // |_|_|
-            
-            {x: 0, y: 300, key: 'platform7'}, // |_|_|
-            {x: 225, y: 300, key: 'platform6'}, // |_|
-            {x: 430, y: 420, key: 'platform0'}, // !!!
-            {x: 675, y: 300, key: 'platform6'}, // |_|
-            {x: 785, y: 300, key: 'platform7'}, // |_|_|
-            
-            {x: 285, y: 570, key: 'platform4'}, // ///
-            {x: 525, y: 570, key: 'platform5'}, // \\\
-            
-            {x: 3, y: 690, key: 'platform5'}, // \\\
-            {x: 3, y: 710, key: 'platform4'}, // ///
-            {x: 810, y: 690, key: 'platform4'}, // ///
-            {x: 810, y: 710, key: 'platform5'}, // \\\
-        ],
-        staticMobs: [
-            //[485, 350, 'mob0'],
-        ],
-        dynamicMobs: [
-            //[0, 270, 'mob1', 'right']
-        ],
-        art: [
-            {x: 605, y: 728, key: 'barn'},
-        ]
+        staticMobs: [],
+        dynamicMobs: [],
+        art: [],
+        deco: []
     }
-
-    // }, { // lvl x
-    //     plats: [            
-    //         {x: 0, y: 50, key: 'platform0'}, // !!!
-    //         {x: 0, y: 75, key: 'platform1'}, // &&&
-    //         {x: 0, y: 100, key: 'platform2'}, // %%%
-    //         {x: 0, y: 125, key: 'platform3'}, // ###
-    //         {x: 0, y: 150, key: 'platform4'}, // ///
-    //         {x: 0, y: 175, key: 'platform5'}, // \\\
-    //         {x: 0, y: 200, key: 'platform6'}, // |_|
-    //         {x: 0, y: 700, key: 'platform7'}, // |_|_|
-    //     ],
-    //     staticMobs: [
-    //         [485, 350, 'mob0'],
-    //     ],
-    //     dynamicMobs: [
-    //         [0, 270, 'mob1', 'right']
-    //     ],
-    //     art: [
-    //         {x: 605, y: 496, key: 'flower0'},
-    //     ]
-    // }
-]
+];
