@@ -155,8 +155,8 @@ export const LEVELS = [
         groundDeathY: 100,
         spawn: { x: 60, y: 368 },
         checkpoints: [
-            { x: 3300, y: -140 },   // after Section 2
-            { x: 6000, y: -340 },   // after Section 4
+            { x: 3390, y: -140 },   // on P8 (was 3300 – spawned in void)
+            { x: 6090, y: -340 },   // on P13 (was 6000 – spawned in void)
         ],
         coinPositions: [
             [1010, -40],    [2620, -40],    [2820, -140],   [3780, -240],
