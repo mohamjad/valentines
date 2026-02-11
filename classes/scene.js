@@ -117,6 +117,7 @@ export default class SCENE extends Phaser.Scene {
         this.load.audio('rain', ['assets/soundFX/asciiRain.mp3']);
         this.load.audio('coin', ['assets/soundFX/collectCoin.mp3']);
         this.load.audio('death', ['assets/soundFX/death.mp3']);
+        this.load.audio('music', ['assets/soundFX/music.mp3']);
     }
 
     create () {       
@@ -187,8 +188,10 @@ export default class SCENE extends Phaser.Scene {
         this.rainFX = this.sound.add('rain');
         this.coinFX = this.sound.add('coin');
         this.deathFX = this.sound.add('death');
+        this.music = this.sound.add('music', { loop: true, volume: 0.35 });
         if(this.soundOn === "1") {
             this.rainFX.play();
+            this.music.play();
         } else {
             this.ui.toggleSound()
         }

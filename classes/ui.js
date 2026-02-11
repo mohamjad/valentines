@@ -224,6 +224,7 @@ THEMES:`, fontStyle).setTint(tint);
         this.scene.rainFX.setMute(mute);
         this.scene.coinFX.setMute(mute);
         this.scene.deathFX.setMute(mute);
+        if (this.scene.music) this.scene.music.setMute(mute);
     }
 
     //change tint of ui
