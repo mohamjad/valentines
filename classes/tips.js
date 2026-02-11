@@ -33,7 +33,10 @@ export default class TIPS {
     }
 
     hideTips() {
-        this.tips.forEach((t) => t.destroy());
+        if (Array.isArray(this.tips)) {
+            this.tips.forEach((t) => t.destroy());
+            this.tips = [];
+        }
         this.scene.physics.resume();
         this.scene.tipsShowing = false;
         if (this.mob && this.mob.scene) this.mob.destroy();

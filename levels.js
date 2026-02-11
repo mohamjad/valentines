@@ -1,10 +1,14 @@
 export const LEVELS = [
-    { // level 0 – tutorial + one heart to advance to level 1
+    { // level 0 – tutorial + floor hearts to advance to level 2
         plats: [
             { x: 400, y: 520, key: 'platform0' },
             { x: 620, y: 520, key: 'platform0' },
         ],
-        coinPositions: [[512, 460]],
+        coinPositions: [
+            [320, 700],   // floor hearts (on base ground)
+            [512, 700],
+            [704, 700],
+        ],
     }, { // level 1 (first level)
         plats: [
             {x: 435, y: 330, key: 'platform0'},
@@ -57,28 +61,33 @@ export const LEVELS = [
         ],
         art: [],
         deco: []
-    }, { // level 3 – MINE SHAFT Section 1 only: ends at first checkpoint
+    }, { // level 3 – MINE SHAFT: ends at 2nd checkpoint (heart on P8)
         doubleJump: true,
         gravity: 560,
-        worldWidth: 1400,
+        worldWidth: 2600,
         worldMinY: -100,
         groundDeathY: 550,
         spawn: { x: 100, y: 368 },
         checkpoints: [
-            { x: 1205, y: 290 },   // on P5 – level ends here
+            { x: 1205, y: 290 },   // on P5 after Section 1
+            { x: 2460, y: 290 },   // on P8 – level goal (heart here)
         ],
         coinPositions: [
-            [1205, 230],   // heart above P5 at checkpoint – collect to complete level
+            [2460, 230],   // heart at 2nd checkpoint – collect to complete level
         ],
         plats: [
             {x: 0, y: 400, key: 'platform5'},       // P1 Start
             {x: 300, y: 400, key: 'platform0'},     // P2; bouncer at 360
             {x: 600, y: 290, key: 'platform0'},     // P3; 110px UP; spikes below
             {x: 900, y: 290, key: 'platform0'},     // P4; bouncer at 950
-            {x: 1150, y: 290, key: 'platform0'},    // P5; checkpoint + goal
+            {x: 1150, y: 290, key: 'platform0'},    // P5; after checkpoint 1
+            {x: 1900, y: 190, key: 'platform0'},    // P6; after Coin 1; long spike pit below
+            {x: 2150, y: 290, key: 'platform0'},    // P7; 100px down breather
+            {x: 2400, y: 290, key: 'platform0'},    // P8; after checkpoint 2 (goal)
         ],
         spikes: [
             { x: 450, y: 520, width: 300, height: 20 },
+            { x: 1300, y: 420, width: 700, height: 20 },
         ],
         staticMobs: [],
         dynamicMobs: [

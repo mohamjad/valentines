@@ -204,7 +204,9 @@ export default class SCENE extends Phaser.Scene {
             let p = this.player;
             const L = LEVELS[parseInt(this.level, 10)];
             const groundDeathY = L && L.groundDeathY != null ? L.groundDeathY : null;
-            if (groundDeathY != null && !this.tipsShowing && !this.gameOver && p.y >= groundDeathY) {
+            const pastDeathLine = groundDeathY != null && p.y >= groundDeathY;
+            const actuallyFalling = p.body && p.body.velocity && p.body.velocity.y > 0;
+            if (groundDeathY != null && !this.tweening && !this.tipsShowing && !this.gameOver && pastDeathLine && actuallyFalling) {
                 if (this.valentineChoiceLevel) {
                     this.valentineGroundDeath();
                 } else {
@@ -380,14 +382,21 @@ export default class SCENE extends Phaser.Scene {
         if(this.ui.helpShowing) {
             this.ui.showHelp(false);
         }
+        // Prevent fall-death check from firing before playTween has rebuilt the level and repositioned the player
+        this.tweening = true;
 
         let level = parseInt(this.level, 10);
-        level++; 
+        if (level === 0) {
+            level = 2;   // skip level 1: tutorial → level 2
+        } else {
+            level++;
+        }
 
         if(level > this.maxLevel) {
             this.gameOver = true;
         } else { 
             this.level = String(level);
+            this.checkpointSpawn = null;   // new level always starts at its spawn, not previous level's checkpoint
             localStorage.setItem("level", this.level);       
             this.ui.updateLevel(this.level);
             this.rainFX.play();
