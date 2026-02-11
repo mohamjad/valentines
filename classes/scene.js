@@ -578,7 +578,7 @@ export default class SCENE extends Phaser.Scene {
         const popupText = this.add.text(cx, cy - 60, 'New ability: Double jump!\n\nPress jump again while in the air.\n\nCollect a heart to reset jump.', {
             color: 'white', fontSize: 'xx-large', align: 'center', wordWrap: { width: 420 },
         }).setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll).setScrollFactor(0);
-        const btn = this.add.text(cx, cy + 50, '[OK]', {
+        const btn = this.add.text(cx, cy + 80, '[OK]', {
             color: 'white', fontSize: 'xx-large',
         }).setInteractive().setDepth(99).setOrigin(0.5, 0.5).setTint(this.theme.scroll).setScrollFactor(0);
         btn.on('pointerup', () => {
